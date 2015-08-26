@@ -1,0 +1,10 @@
+.build*
+build*
+*build*.log
+*.aps
+*.orig
+.git
+.all
+.logs
+*.sdf
+*.sublime-workspace
