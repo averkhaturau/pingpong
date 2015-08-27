@@ -6,5 +6,6 @@ build*
 .git
 .all
 .logs
+*.user
 *.sdf
 *.sublime-workspace
