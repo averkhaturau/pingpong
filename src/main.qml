@@ -8,6 +8,16 @@ Window {
     height: 530
 
     MainForm {
+        id: battlefield
         anchors.fill: parent
+    }
+
+    PongLogic{
+        battlefield: battlefield
+        paddleLeft: battlefield.paddleLeft
+        paddleRight: battlefield.paddleRight
+        ball: battlefield.ball
+        countL: battlefield.countLeft
+        countR: battlefield.countRight
     }
 }

@@ -2,8 +2,9 @@
     <qresource prefix="/">
         <file>main.qml</file>
         <file>MainForm.ui.qml</file>
+        <file>PongLogic.qml</file>
     </qresource>
-    <qresource prefix="/images/">
+    <qresource prefix="/images">
         <file alias="logo.png">../assets/images/logo.png</file>
     </qresource>
 </RCC>
