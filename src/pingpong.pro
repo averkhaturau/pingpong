@@ -14,11 +14,16 @@ QML_IMPORT_PATH =
 # Default rules for deployment.
 include(deployment.pri)
 
-ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android
-
 win32:RC_ICONS += "../assets/images/logo.ico"
 VERSION = "0.0.0.0"
 QMAKE_TARGET_COMPANY="Aliaksei Verkhaturau"
 QMAKE_TARGET_DESCRIPTION="Clasical PingPong game rewtitter on QML"
 QMAKE_TARGET_COPYRIGHT="Copyright 2015 (C) Aliaksei Verkhaturau"
 QMAKE_TARGET_PRODUCT="PingPong"
+
+DISTFILES += \
+    ../android/AndroidManifest.xml \
+    ../android/AndroidManifest.xml \
+    ../android/res/values/libs.xml
+
+ANDROID_PACKAGE_SOURCE_DIR = $$PWD/../android

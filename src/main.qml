@@ -20,4 +20,7 @@ Window {
         countL: battlefield.countLeft
         countR: battlefield.countRight
     }
+
+//    signal startGame();
+//    Component.onCompleted: startGame()
 }
