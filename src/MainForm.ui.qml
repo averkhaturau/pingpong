@@ -7,6 +7,7 @@ Rectangle {
     height: 530
     color: "#1f291f"
 
+    // net
     Rectangle {
         x: parent.width / 2
         y: 0
@@ -14,17 +15,17 @@ Rectangle {
         height: parent.height
         color: "darkgrey"
     }
+    // border lines
     Rectangle {
         anchors.fill: parent
         width: 1
         color: "transparent"
-        anchors.rightMargin: 0
+        anchors.rightMargin: -1
         anchors.bottomMargin: 0
-        anchors.leftMargin: 1
+        anchors.leftMargin: -1
         anchors.topMargin: 0
         border.color: "darkgrey"
     }
-
     Rectangle {
         id: paddleRight
         x: parent.width-width
@@ -80,5 +81,4 @@ Rectangle {
     property alias paddleRight: paddleRight
     property alias countLeft: countLeft
     property alias countRight: countRight
-
 }

@@ -1,7 +1,10 @@
 import QtQuick 2.0
+import QtSensors 5.3
 
 Item {
     id: pongLogic
+    anchors.fill: parent
+
     property Item battlefield: none
     property Item ball: none
     property Item paddleLeft: none
@@ -13,7 +16,7 @@ Item {
     property real leftPaddleSpeed: 0
     property real rightPaddleSpeed: 0
 
-    property bool isLeftPaddleAutoMode: false
+    property bool isLeftPaddleAutoMode: true
     property bool isRightPaddleAutoMode: false
 
     readonly property real padleSpeedRate: 11
@@ -22,9 +25,12 @@ Item {
         ball.x = battlefield.width / 2 - ball.width / 2
         ball.y = battlefield.height / 2 - ball.width / 2
         ballSpeed = [battlefield.width/100 * (-1+2*Math.round(Math.random())), battlefield.height/200 * (-1+2*Math.round(Math.random()))]
-        paddleLeft.y = (battlefield.height - paddleLeft.height)/2
-        paddleRight.y = (battlefield.height - paddleRight.height)/2
+     //   paddleLeft.y = (battlefield.height - paddleLeft.height)/2
+     //   paddleRight.y = (battlefield.height - paddleRight.height)/2
     }
+
+    function pause(){timer.stop()}
+    function resume(){timer.start()}
 
     function updateCount() {
         countL.text = ''+count[0];
@@ -72,19 +78,16 @@ Item {
     function updatePaddlesPosition(){
         if (isLeftPaddleAutoMode)
             paddleLeft.y =  setPaddleToFieldBoundsY(ball.y - (paddleLeft.height-ball.height)/2);
-        //else if (typeof leftTouchPoint != 'undefined' && leftTouchPoint.pressed)
-        //  paddleLeft.y = setPaddleToFieldBoundsY(leftTouchPoint.y-paddleLeft.height/2);
         else
             paddleLeft.y = setPaddleToFieldBoundsY(paddleLeft.y + leftPaddleSpeed);
 
         if (isRightPaddleAutoMode)
             paddleRight.y = setPaddleToFieldBoundsY(ball.y - (paddleLeft.height-ball.height)/2);
-        //else if (typeof rightTouchPoint != 'undefined' && rightTouchPoint.pressed)
-        //    paddleLeft.y = setPaddleToFieldBoundsY(rightTouchPoint.y-paddleRight.height/2);
         else
             paddleRight.y = setPaddleToFieldBoundsY(paddleRight.y + rightPaddleSpeed);
     }
 
+    // Keyboard control
     FocusScope {
         focus: true
         Keys.onPressed: {
@@ -105,16 +108,16 @@ Item {
             }
         }
     }
-    /*
-    MultiPointTouchArea {
-        anchors.fill: parent
-        touchPoints: [
-            TouchPoint{id: leftTouchPoint},
-            TouchPoint{id: rightTouchPoint}
-        ]
+
+    // Accelerometer control
+    Accelerometer {
+        id: acclrmtr
+        active: true
+        onReadingChanged: {
+            var pitch = Math.atan2(reading.x, Math.sqrt(reading.y * reading.y + reading.z * reading.z));
+            rightPaddleSpeed = pitch * padleSpeedRate
+        }
     }
-    */
-    anchors.fill: parent
 
     Timer{
         id: timer
